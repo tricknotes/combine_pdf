@@ -523,11 +523,11 @@ module CombinePDF
         end
       end
       if catalogs.is_a?(Array)
-        catalogs.each { |c| catalog_pages(c, inheritance_hash) unless c.nil? }
+        catalogs.each { |c| catalog_pages(c, inheritance_hash.dup) unless c.nil? }
       elsif catalogs.is_a?(Hash)
         if catalogs[:is_reference_only]
           if catalogs[:referenced_object]
-            catalog_pages(catalogs[:referenced_object], inheritance_hash)
+            catalog_pages(catalogs[:referenced_object], inheritance_hash.dup)
           else
             warn "couldn't follow reference!!! #{catalogs} not found!"
           end
